@@ -16,6 +16,6 @@ DATABASE_URL = f"postgres://{USERNAME}:{PASSWORD}@{HOST_ADDRESS}:{PORT}/{DATABAS
 # Creating Async Engine
 engine = create_async_engine(
     DATABASE_URL,
-    poolclass = NullPool,
+    poolclass = NullPool,   # Because our database(aiven)'s free plan doesn't support pooling
     echo = True
 )
