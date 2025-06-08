@@ -1,4 +1,4 @@
-from models.base import BasicModel
+from app.models.base import BasicModel
 from sqlalchemy import Column, String,Date,Boolean
 
 class User(BasicModel):
