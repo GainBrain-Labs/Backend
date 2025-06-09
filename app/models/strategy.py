@@ -14,6 +14,6 @@ class Strategy(BasicModel):
     __tablename__ = "strategy"
 
     name = Column(String,unique=True, nullable=False)
-    description = Column(String, nullable=False)
+    description = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
     expression_id = Column(Integer, ForeignKey('expression.id'),nullable=False)
