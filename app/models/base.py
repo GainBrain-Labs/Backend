@@ -1,5 +1,5 @@
 from datetime import datetime
-from db.base import Base
+from app.db.base import Base
 from sqlalchemy import Column, Integer, DateTime
 
 class BasicModel(Base):
