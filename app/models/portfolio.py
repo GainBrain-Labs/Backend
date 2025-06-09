@@ -1,7 +1,7 @@
 from app.models.base import BasicModel
 from sqlalchemy import Column, String, Integer, ARRAY, Integer, ForeignKey
 
-class portfolio(BasicModel):
+class Portfolio(BasicModel):
     __tablename__ = 'portfolio'
     
     name = Column(String(100), nullable=False, unique=True)
