@@ -12,3 +12,9 @@ cd app
 
 then run server
 uvicorn main:app --reload
+
+
+OR
+
+run from backend folder directly
+uvicorn app.main:app --reload
