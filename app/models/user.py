@@ -15,3 +15,5 @@ class User(BasicModel):
     dob = Column(Date, nullable=True)
     is_active = Column(Boolean, default=True)
     strategy = relationship('Strategy',backref='user',cascade='all,delete')
+    portfolio = relationship('Portfolio', backref='user', cascade='all, delete')
+    custom_stock_group = relationship('CustomStockGroup', backref='user', cascade='all, delete')
