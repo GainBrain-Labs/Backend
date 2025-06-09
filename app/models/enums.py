@@ -5,7 +5,6 @@ class StockGroupType(IntEnum):
     NIFTY100 = 2
     NIFTY200 = 3
     NIFTY500 = 4
-    CUSTOM = 5
 
 class CompareType(IntEnum):
     INTRA = 1
