@@ -8,11 +8,12 @@ class Expression(Base):
 
     id = Column(Integer, primary_key=True)
     expression = Column(String,unique=True, nullable=False)
+    strategy = relationship('Strategy',backref='expression',cascade='all,delete')
 
 class Strategy(BasicModel):
     __tablename__ = "strategy"
 
     name = Column(String,unique=True, nullable=False)
-    description = Column(String)
-    user_id = relationship("User", foreign_keys='user.id',cascade="all, delete-orphan")
-    expression_id = relationship("Expression", foreign_keys='expression.id',cascade="all, delete-orphan")
+    description = Column(String, nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
+    expression_id = Column(Integer, ForeignKey('expression.id'),nullable=False)

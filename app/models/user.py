@@ -1,5 +1,6 @@
 from models.base import BasicModel
 from sqlalchemy import Column, String,Date,Boolean
+from sqlalchemy.orm import relationship
 
 class User(BasicModel):
     __tablename__ = "user"
@@ -13,3 +14,4 @@ class User(BasicModel):
     phone_number = Column(String, unique=True, nullable=True)
     dob = Column(Date, nullable=True)
     is_active = Column(Boolean, default=True)
+    strategy = relationship('Strategy',backref='user',cascade='all,delete')
