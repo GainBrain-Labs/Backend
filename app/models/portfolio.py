@@ -1,5 +1,5 @@
 from app.models.base import BasicModel
-from sqlalchemy import Column, String, Integer, Integer, ForeignKey
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 
 class Portfolio(BasicModel):
