@@ -1,7 +1,7 @@
 from app.models.base import BasicModel
 from sqlalchemy import Column, String, Integer, Enum, ForeignKey
 from sqlalchemy.orm import relationship
-from app.models.enums import StockGroupType
+from app.models.enums import DefaultStockGroupType
 
 class Stock(BasicModel):
     __tablename__ = 'stock'
@@ -14,6 +14,7 @@ class StockGroup(BasicModel):
     name = Column(String(100), nullable=False)
     ticker = Column(String(20), nullable=False, unique=True, index=True)
     type =  Column(String(20), nullable=False)
+    # future make type as enum with values 'default', 'custom'
     portfolio_composition = relationship('PortfolioComposition', backref='stock_group', cascade='all, delete-orphan')
     stock_group_composition = relationship('StockGroupComposition', backref='stock_group', cascade='all, delete-orphan')
 
@@ -25,7 +26,7 @@ class StockGroup(BasicModel):
 class DefaultStockGroup(StockGroup):
     __tablename__ = 'default_stock_group'
     id = Column(Integer, ForeignKey('stock_group.id'), primary_key=True)
-    stock_group_type =  Column(Enum(StockGroupType), nullable=False)
+    stock_group_type =  Column(Enum(DefaultStockGroupType), nullable=False)
 
     
     __mapper_args__ = {
