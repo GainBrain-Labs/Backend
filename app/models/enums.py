@@ -1,4 +1,4 @@
-from enum import IntEnum
+from enum import Enum, IntEnum
 
 class DefaultStockGroupType(IntEnum):
     NIFTY50 = 1
@@ -9,3 +9,9 @@ class DefaultStockGroupType(IntEnum):
 class CompareType(IntEnum):
     INTRA = 1
     INTER = 2
+    
+class BacktestProcessingStatus(Enum):
+    PROCESSING = "processing"
+    COMPLETED = "completed"
+    CANCELLED = "cancelled"
+    FAILED = "failed"
