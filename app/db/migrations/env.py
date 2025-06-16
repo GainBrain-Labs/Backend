@@ -5,13 +5,22 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-import sys
+
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  # to import from project root
 
 from app.config.database import DATABASE_URL
 from alembic import context
 
+from dotenv import load_dotenv
+load_dotenv()  # Load variables from .env
+
+# -- DATABASE CONFIG FROM .env --
+USERNAME = os.getenv("db_username")
+PASSWORD = os.getenv("db_password")
+HOST_ADDRESS = os.getenv("db_host_address")
+DATABASE_NAME = os.getenv("db_database_name")
+
+DATABASE_URL = f"postgresql+asyncpg://{USERNAME}:{PASSWORD}@{HOST_ADDRESS}/{DATABASE_NAME}"
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
