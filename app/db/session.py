@@ -64,7 +64,3 @@ class DatabaseSessionManager:
             await session.close()
             
 session_manager = DatabaseSessionManager(engine=engine)
-
-async def get_db():
-    async with session_manager.session() as session:
-        yield session
