@@ -2,6 +2,7 @@ from app.models.base import BasicModel
 from app.db.base import Base
 from sqlalchemy import Column, Integer, ForeignKey, String, DateTime, Enum, Float
 from app.models.enums import BacktestProcessingStatus
+from sqlalchemy.orm import relationship
 
 class Backtest(BasicModel):
     __tablename__ = "backtest"
@@ -15,6 +16,8 @@ class Backtest(BasicModel):
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     status =  Column(Enum(BacktestProcessingStatus), nullable=False)
+    backtest_result = relationship('BacktestResult', backref='backtest', cascade='all, delete-orphan')
+    compare_backtest_composition = relationship('CompareBacktestComposition',backref='backtest',cascade='all, delete-orphan')
 
 class BacktestResultMetrics(Base):
     __tablename__ = "backtest_result_metrics"
@@ -23,10 +26,12 @@ class BacktestResultMetrics(Base):
     sharpe_ratio = Column(Float)
     max_drawdown = Column(Float)
     final_return = Column(Float)
+    backtest_result_id = Column(Integer, ForeignKey('backtest_result.id'), nullable=False)
     
 class BacktestResult(BasicModel):
     __tablename__ = "backtest_result"
     
     backtest_id = Column(Integer, ForeignKey('backtest.id'), nullable=False)
     final_portfolio_value = Column(Float)
-    backtest_result_metrics_id = Column(Integer, ForeignKey('backtest_result_metrics.id'), nullable=False)
+    backtest_result_metrics = relationship('BacktestResultMetrics', backref='backtest_result', cascade='all, delete-orphan')
+    backtest_result_timescale = relationship('BacktestResultTimescale', backref='backtest_result', cascade='all, delete-orphan')

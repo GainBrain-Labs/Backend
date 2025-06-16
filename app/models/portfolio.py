@@ -8,6 +8,7 @@ class Portfolio(BasicModel):
     name = Column(String(100), nullable=False, unique=True)
     user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
     portfolio_composition = relationship('PortfolioComposition',backref='portfolio',cascade='all, delete-orphan')
+    backtest = relationship('Backtest', backref='portfolio', cascade='all, delete-orphan')
 
 
 class PortfolioComposition(BasicModel):
