@@ -1,5 +1,5 @@
 from app.models.base import BasicModel
-from app.db.base import Base
+from app.models import Base
 from sqlalchemy import Column, Enum, Integer, ForeignKey, String
 from app.models.enums import CompareType
 from sqlalchemy.orm import relationship
