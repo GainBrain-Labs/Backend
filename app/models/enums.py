@@ -1,11 +1,11 @@
-from enum import IntEnum
+from enum import Enum
 
-class DefaultStockGroupType(IntEnum):
-    NIFTY50 = 1
-    NIFTY100 = 2
-    NIFTY200 = 3
-    NIFTY500 = 4
+class DefaultStockGroupType(Enum):
+    NIFTY50 = "NIFTY50"
+    NIFTY100 = "NIFTY100"
+    NIFTY200 = "NIFTY200"
+    NIFTY500 = "NIFTY500"
 
-class CompareType(IntEnum):
-    INTRA = 1
-    INTER = 2
+class CompareType(Enum):
+    INTRA = "INTRA"
+    INTER = "INTER"
