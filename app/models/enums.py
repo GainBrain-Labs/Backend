@@ -11,7 +11,7 @@ class CompareType(IntEnum):
     INTER = 2
     
 class BacktestProcessingStatus(Enum):
-    PROCESSING = "processing"
-    COMPLETED = "completed"
-    CANCELLED = "cancelled"
-    FAILED = "failed"
+    PROCESSING = "PROCESSING"
+    COMPLETED = "COMPLETED"
+    CANCELLED = "CANCELLED"
+    FAILED = "FAILED"
