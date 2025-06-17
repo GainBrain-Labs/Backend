@@ -17,3 +17,4 @@ class Strategy(BasicModel):
     description = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
     expression_id = Column(Integer, ForeignKey('expression.id'),nullable=False)
+    backtest = relationship('Backtest', backref='strategy', cascade='all, delete-orphan')
