@@ -1,4 +1,4 @@
-from app.db.base import Base
+from app.models import Base
 from sqlalchemy import Column, Date, Integer, ForeignKey, Float
 
 class BacktestResultTimescale(Base):
