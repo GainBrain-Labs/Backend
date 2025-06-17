@@ -10,18 +10,19 @@ class User:
     profile_pic: str
     phone_no: str
     dob: str
+    isActive: bool
 
 @strawberry.input
-class createUserInput:
+class CreateUserInput:
     username: str
     email: str
     password: str
 
 @strawberry.input
-class getUserInput:
+class GetUserInput:
     id: int
 
 @strawberry.input
-class loginUserInput:
+class LoginUserInput:
     email: str
     password: str

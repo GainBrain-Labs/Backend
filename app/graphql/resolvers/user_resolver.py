@@ -1,8 +1,8 @@
-from app.graphql.types.user import User, createUserInput, getUserInput, loginUserInput
+from app.graphql.types.user import User, CreateUserInput, LoginUserInput, GetUserInput
 from typing  import List, Optional
 
 def get_users() -> List[User]:
-        #db call for get all users
+        #service call for get all users
     return [
         User(
             id = 1,
@@ -12,7 +12,8 @@ def get_users() -> List[User]:
             email="nitya@example.com",
             profile_pic="https://example.com/images/nitya.jpg",
             phone_no="9876543210",
-            dob="1999-01-15"
+            dob="1999-01-15",
+            isActive=True
         ),
         User(
             id = 2,
@@ -22,7 +23,8 @@ def get_users() -> List[User]:
             email="ananya@example.com",
             profile_pic="https://example.com/images/ananya.jpg",
             phone_no="9123456780",
-            dob="2000-05-30"
+            dob="2000-05-30",
+            isActive=True
         ),
         User(
             id = 3,
@@ -32,12 +34,13 @@ def get_users() -> List[User]:
             email="ravi@example.com",
             profile_pic="https://example.com/images/ravi.jpg",
             phone_no="9988776655",
-            dob="1998-11-22"
+            dob="1998-11-22",
+            isActive=True
         ),
     ]
 
-def get_user(user:getUserInput) -> Optional[User]:
-    #db call for one user using id
+def get_user(user:GetUserInput) -> Optional[User]:
+    #service call for one user using id
     return User(
         id = 1,
         first_name="Nityanand",
@@ -46,11 +49,12 @@ def get_user(user:getUserInput) -> Optional[User]:
         email="nitya@example.com",
         profile_pic="https://example.com/images/nitya.jpg",
         phone_no="9876543210",
-        dob="1999-01-15"
+        dob="1999-01-15",
+        isActive=True
     )
 
-def create_user(user:createUserInput) -> Optional[User]:
-    #db call to add user to database
+def create_user(user:CreateUserInput) -> Optional[User]:
+    #service call to add user to database
     return User(
         id = 4,
         first_name="nitya",
@@ -59,11 +63,12 @@ def create_user(user:createUserInput) -> Optional[User]:
         email=user.email,
         profile_pic="https://example.com/images/nitya.jpg",
         phone_no="7004813144",
-        dob="15-03-2004"
+        dob="15-03-2004",
+        isActive=True
     )
 
-def login_user(user: loginUserInput) -> Optional[User]:
-    #db call to check ans return if user exists with given parameters
+def login_user(user: LoginUserInput) -> Optional[User]:
+    #service call to check ans return if user exists with given parameters
     return User(
         id = 4,
         first_name="nitya",
@@ -72,5 +77,6 @@ def login_user(user: loginUserInput) -> Optional[User]:
         email=user.email,
         profile_pic="https://example.com/images/nitya.jpg",
         phone_no="7004813144",
-        dob="15-03-2004"
+        dob="15-03-2004",
+        isActive=True
     )
