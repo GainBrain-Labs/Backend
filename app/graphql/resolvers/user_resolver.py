@@ -73,7 +73,7 @@ def login_user(user: LoginUserInput) -> Optional[User]:
         id = 4,
         first_name="nitya",
         last_name="noi hai",
-        user_name=user.username,
+        user_name="dsfdsf",
         email=user.email,
         profile_pic="https://example.com/images/nitya.jpg",
         phone_no="7004813144",

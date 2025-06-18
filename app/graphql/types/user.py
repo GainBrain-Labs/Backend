@@ -20,7 +20,7 @@ class CreateUserInput:
 
 @strawberry.input
 class GetUserInput:
-    id: int
+    email: str
 
 @strawberry.input
 class LoginUserInput:
