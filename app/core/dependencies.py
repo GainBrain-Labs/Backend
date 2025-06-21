@@ -4,15 +4,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.user_repository import UserRepository
 from app.services.user_service import UserService
 from app.services.auth_service import AuthService
+from contextlib import asynccontextmanager
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with session_manager.session() as session:
         yield session
 
+@asynccontextmanager
 async def get_user_context():
-    async for session in get_db():
+    async with session_manager.session() as session:
         user_repo = UserRepository(session)
-        return {
+        yield {
             "user_service": UserService(user_repo),
             "auth_service": AuthService(user_repo)
         }
