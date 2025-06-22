@@ -8,7 +8,7 @@ class Expression(Base):
 
     id = Column(Integer, primary_key=True)
     expression = Column(String,unique=True, nullable=False)
-    strategy = relationship('Strategy',backref='expression',cascade='all,delete')
+    strategy = relationship('Strategy',backref='expression',cascade='all,delete-orphan')
 
 class Strategy(BasicModel):
     __tablename__ = "strategy"
@@ -17,3 +17,4 @@ class Strategy(BasicModel):
     description = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
     expression_id = Column(Integer, ForeignKey('expression.id'),nullable=False)
+    backtest = relationship('Backtest', backref='strategy', cascade='all, delete-orphan')

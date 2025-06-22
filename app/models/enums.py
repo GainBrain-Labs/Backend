@@ -1,12 +1,17 @@
-from enum import IntEnum
+from enum import Enum
 
-class stock_group_type(IntEnum):
-    NIFTY50 = 1
-    NIFTY100 = 2
-    NIFTY200 = 3
-    NIFTY500 = 4
-    CUSTOM = 5
+class DefaultStockGroupType(Enum):
+    NIFTY50 = "NIFTY50"
+    NIFTY100 = "NIFTY100"
+    NIFTY200 = "NIFTY200"
+    NIFTY500 = "NIFTY500"
+    
+class BacktestProcessingStatus(Enum):
+    PROCESSING = "PROCESSING"
+    COMPLETED = "COMPLETED"
+    CANCELLED = "CANCELLED"
+    FAILED = "FAILED"
 
-class compare_type(IntEnum):
-    INTRA = 1
-    INTER = 2
+class CompareType(Enum):
+    INTRA = "INTRA"
+    INTER = "INTER"

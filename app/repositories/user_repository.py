@@ -31,3 +31,4 @@ class UserRepository(BaseRepository[User]):
             return user
         except SQLAlchemyError as e:
             raise RepositoryError(f"Database error on get_by_email: {e}")
+            

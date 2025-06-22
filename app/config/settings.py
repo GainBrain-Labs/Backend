@@ -5,7 +5,6 @@ class DatabaseSettings(BaseSettings):
   db_username: str
   db_password: SecretStr
   db_host_address: str
-  db_port: int
   db_database_name: str
   class Config:
     env_file = ".env"
