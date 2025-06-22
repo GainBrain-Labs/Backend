@@ -20,3 +20,15 @@ class UserRepository(BaseRepository[User]):
             return user
         except SQLAlchemyError as e:
             raise RepositoryError(f"Database error on get_by_email: {e}")
+
+    async def get_by_username(self, username: str) -> Optional[User]:
+        try:
+            stmt = select(User).where(User.username == username)
+            result = await self.db.execute(stmt)
+            user = result.scalar_one_or_none()
+            if not user:
+                raise NotFoundError(f"User with email {username} not found")
+            return user
+        except SQLAlchemyError as e:
+            raise RepositoryError(f"Database error on get_by_email: {e}")
+            
