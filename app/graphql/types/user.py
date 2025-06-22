@@ -6,7 +6,7 @@ class User:
     id: int
     first_name: str
     last_name: str
-    user_name: str
+    username: str
     email: str
     profile_pic: str
     phone_no: str

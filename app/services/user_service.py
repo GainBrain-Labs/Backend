@@ -1,35 +1,48 @@
-from fastapi import HTTPException, status
+from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.repositories.user_repository import UserRepository
 from app.core.security import hash_password, verify_password
 from app.schemas.user import UserCreate, GetUser, ValidateUser
+from app.repositories.base_repository import BaseRepository
+from app.exceptions.repository_errors import NotFoundError
+from app.config.logger import logger
+from app.mapperServiceToDB import user_mapper
 
-async def create_user(user_data: UserCreate, db: AsyncSession):
-    print("in user service")
-    print(user_data)
-    user_repository = UserRepository(db)
-    if await user_repository.get_by_email(user_data.email):
-        raise HTTPException(status_code=400, detail="Email already exists")
-    if await user_repository.get_user_by_username(user_data.username):
-        raise HTTPException(status_code=400, detail="Username already taken")
 
-    hashed = hash_password(user_data.password)
-    return await user_repository.create(user_data, hashed)
+class UserService() :
+    def __init__(self, user_repository:BaseRepository):
+        self.user_repository = user_repository
 
-async def validate_user(user : ValidateUser, db: AsyncSession):
-    print(user)
-    user_repository = UserRepository(db)
-    user = await user_repository.get_by_email(user.email)
-    if not user or not verify_password(user.password, user.password):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-    return user
+    async def create_user(self,user_data: UserCreate):
+        print("in user service")
+        print(user_data)
+        try:
+            await self.user_repository.get_by_email(user_data.email)
+        except NotFoundError as e:
+            logger.info("email not found")
+        except Exception:
+            raise
+        try:
+            await self.user_repository.get_by_username(user_data.username)
+        except NotFoundError as e:
+            logger.info("username not found")
+        except Exception:
+            raise
 
-async def get_all_user(db:AsyncSession):
-    user_repository = UserRepository(db)
-    return await user_repository.get_all()
+        hashed = hash_password(user_data.password)
+        user_data.password = hashed
+        create_user_input = user_mapper.user_service_to_db(user_data)
+        return await self.user_repository.create(create_user_input)
 
-async def get_user(user: GetUser, db: AsyncSession):
-    print(user)
-    user_repository = UserRepository(db)
-    return await user_repository.get_by_email(user.email)
+    async def validate_user(self,user_data : ValidateUser):
+        user = await self.user_repository.get_by_email(user_data.email)
+        if not user or not verify_password(user_data.password, user.password):
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        return user
+
+    async def get_all_user(self):
+        return await self.user_repository.get_all()
+
+    async def get_user(self,user: GetUser):
+        print(user)
+        return await self.user_repository.get_by_email(user.email)
 
