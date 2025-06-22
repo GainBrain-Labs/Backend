@@ -33,3 +33,4 @@ class GetUserInput:
 class LoginUserInput:
     email: str
     password: str
+
