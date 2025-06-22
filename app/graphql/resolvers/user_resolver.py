@@ -1,8 +1,12 @@
 from app.graphql.types.user import User, CreateUserInput, LoginUserInput, GetUserInput
 from typing  import List, Optional
+from app.mappers import user_mappers
+from app.services import user_service
+from app.core import dependencies
 
-def get_users() -> List[User]:
-        #service call for get all users
+async def get_users() -> List[User]:
+    return await user_service.get_all_user(dependencies.get_db())
+
     return [
         User(
             id = 1,
@@ -39,8 +43,11 @@ def get_users() -> List[User]:
         ),
     ]
 
-def get_user(user:GetUserInput) -> Optional[User]:
-    #service call for one user using id
+
+async def get_user(user:GetUserInput) -> Optional[User]:
+    get_user_input = user_mappers.get_user_input(user)
+    return await user_service.get_user(get_user_input,dependencies.get_db())
+
     return User(
         id = 1,
         first_name="Nityanand",
@@ -53,8 +60,11 @@ def get_user(user:GetUserInput) -> Optional[User]:
         isActive=True
     )
 
-def create_user(user:CreateUserInput) -> Optional[User]:
-    #service call to add user to database
+
+async def create_user(user:CreateUserInput) -> Optional[User]:
+    user_input = user_mappers.create_user_input(user)
+    return await user_service.create_user(user_input,dependencies.get_db())
+
     return User(
         id = 4,
         first_name="nitya",
@@ -67,8 +77,10 @@ def create_user(user:CreateUserInput) -> Optional[User]:
         isActive=True
     )
 
-def login_user(user: LoginUserInput) -> Optional[User]:
-    #service call to check ans return if user exists with given parameters
+async def login_user(user: LoginUserInput) -> Optional[User]:
+    login_user_input = user_mappers.validate_user_input(user)
+    return await user_service.validate_user(login_user_input,dependencies.get_db())
+  
     return User(
         id = 4,
         first_name="nitya",

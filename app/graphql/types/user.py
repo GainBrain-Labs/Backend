@@ -22,7 +22,7 @@ class CreateUserInput:
     last_name: str | None
     profile_pic: str | None
     phone_number: str | None
-    dob: datetime.datetime | None
+    dob: datetime.date | None
 
 
 @strawberry.input
@@ -33,3 +33,4 @@ class GetUserInput:
 class LoginUserInput:
     email: str
     password: str
+
