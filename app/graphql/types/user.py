@@ -1,5 +1,6 @@
 import strawberry
 import datetime
+from typing import Optional
 
 @strawberry.type
 class User:
@@ -19,10 +20,10 @@ class CreateUserInput:
     email: str
     password: str
     first_name: str
-    last_name: str | None
-    profile_pic: str | None
-    phone_number: str | None
-    dob: datetime.date | None
+    last_name: Optional[str] =  None
+    profile_pic: Optional[str] =  None
+    phone_number: Optional[str] =  None
+    dob: Optional[datetime.date] = None
 
 
 @strawberry.input
