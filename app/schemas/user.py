@@ -19,6 +19,9 @@ class ValidateUser(BaseModel):
     email: str
     password: str
 
+class UserToken(BaseModel):
+    token: str
+
 class UserOut(BaseModel):
     username: str
     first_name: str

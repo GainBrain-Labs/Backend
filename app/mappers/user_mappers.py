@@ -1,4 +1,4 @@
-from app.graphql.types.user import GetUserInput, LoginUserInput, CreateUserInput
+from app.graphql.types.user import GetUserInput, LoginUserInput, CreateUserInput, UserToken, UserByTokenInput
 from app.schemas.user import UserCreate, GetUser, ValidateUser
 
 def create_user_input(user:CreateUserInput) -> UserCreate :
@@ -23,4 +23,14 @@ def validate_user_input(user: LoginUserInput) -> ValidateUser:
     return ValidateUser(
         email=user.email,
         password=user.password
+    )
+
+def to_user_token_input(token: UserByTokenInput) -> UserToken:
+    return UserToken(
+        token=token.token
+    )
+
+def to_user_token(token: str) -> UserToken:
+    return UserToken(
+        token=token
     )
