@@ -6,13 +6,13 @@ from typing import Optional
 class User:
     id: int
     first_name: str
-    last_name: str
     username: str
     email: str
-    profile_pic: str
-    phone_no: str
-    dob: datetime.datetime
-    isActive: bool
+    last_name: Optional[str] =  None
+    profile_pic: Optional[str] =  None
+    phone_number: Optional[str] =  None
+    dob: Optional[datetime.date] = None
+    is_active: bool
 
 @strawberry.input
 class CreateUserInput:
