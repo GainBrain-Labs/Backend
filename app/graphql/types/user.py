@@ -14,6 +14,14 @@ class User:
     dob: Optional[datetime.date] = None
     is_active: bool
 
+@strawberry.type
+class UserToken:
+    token: str
+
+@strawberry.input
+class UserByTokenInput:
+    token: str
+
 @strawberry.input
 class CreateUserInput:
     username: str
