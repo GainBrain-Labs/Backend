@@ -1,4 +1,9 @@
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
-metadata = Base.metadata
+from app.models.base import Base
+from app.models.user import User
+from app.models.stock import Stock
+from app.models.portfolio import Portfolio
+from app.models.backtest import Backtest
+from app.models.compare import Compare
+from app.models.strategy import Strategy
+from app.models.timescale import BacktestResultTimescale
+from app.models.timescale import StockTimescale
