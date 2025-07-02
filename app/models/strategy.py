@@ -1,5 +1,5 @@
 from app.models.base import BasicModel
-from app.models import Base
+from app.models.base import Base
 from sqlalchemy import Column, String,Integer, ForeignKey
 from sqlalchemy.orm import relationship
 

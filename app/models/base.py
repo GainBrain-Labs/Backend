@@ -1,6 +1,9 @@
 from datetime import datetime
-from app.models import Base
 from sqlalchemy import Column, Integer, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+metadata = Base.metadata
 
 class BasicModel(Base):
     

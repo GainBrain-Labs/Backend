@@ -7,6 +7,11 @@ class NotFoundError(RepositoryError):
     def __init__(self, message: str = "Item not found"):
         super().__init__(message)
 
+class FoundError(RepositoryError):
+    """raised whehn object already present"""
+    def __init__(self, message: str = "item already present"):
+        super().__init__(message)
+
 class CreationError(RepositoryError):
     """Raised when an object creation fails."""
     def __init__(self, message: str = "Failed to create item"):

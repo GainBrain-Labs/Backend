@@ -1,5 +1,5 @@
-from app.models import Base
-from sqlalchemy import Column, Date, Integer, ForeignKey, Float
+from app.models.base import Base
+from sqlalchemy import Column, Date, Integer, ForeignKey, Float, String
 
 class BacktestResultTimescale(Base):
     __tablename__ = "backtest_result_timescale"
@@ -12,7 +12,7 @@ class BacktestResultTimescale(Base):
 class StockTimescale(Base):
     __tablename__ = "stock_timescale"
     
-    ticker = Column(Integer, nullable=False, primary_key=True)
+    ticker = Column(String(20), nullable=False, primary_key=True)
     date = Column(Date, nullable=False, primary_key=True)
     open_price = Column(Float)
     close_price = Column(Float)

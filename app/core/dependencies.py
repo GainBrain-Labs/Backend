@@ -2,8 +2,10 @@ from typing import AsyncGenerator, Dict
 from app.db.session import session_manager
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.user_repository import UserRepository
+from app.repositories.timescale_repository import TimescaleRepository
 from app.services.user_service import UserService
 from app.services.auth_service import AuthService
+from app.services.data_service import DataService
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -16,11 +18,15 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 async def get_user_context() -> dict[str, UserService]:
     async with session_manager.session() as session:
         user_repo = UserRepository(session)
+        timescale_repo = TimescaleRepository(session)
+        
         user_service = UserService(user_repo)
         auth_service = AuthService()
+        data_service = DataService(timescale_repo)
         return {
             "user_service": user_service,
-            "auth_service": auth_service
+            "auth_service": auth_service,
+            "data_service": data_service
         }
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")

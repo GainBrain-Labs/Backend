@@ -1,5 +1,5 @@
 from app.models.base import BasicModel
-from app.models import Base
+from app.models.base import Base
 from sqlalchemy import Column, Integer, ForeignKey, String, DateTime, Enum, Float
 from app.models.enums import BacktestProcessingStatus
 from sqlalchemy.orm import relationship
