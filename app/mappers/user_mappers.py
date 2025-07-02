@@ -2,7 +2,6 @@ from app.graphql.types.user import GetUserInput, LoginUserInput, CreateUserInput
 from app.schemas.user import UserCreate, GetUser, ValidateUser
 
 def create_user_input(user:CreateUserInput) -> UserCreate :
-    print(user)
     return UserCreate(
         username=user.username,
         first_name=user.first_name,
