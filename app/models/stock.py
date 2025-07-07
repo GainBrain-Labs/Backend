@@ -12,6 +12,7 @@ class Stock(BasicModel):
 class StockGroup(BasicModel):
     __tablename__ = 'stock_group'
     name = Column(String(100), nullable=False)
+    # in case of custom group ticker will be randomly unique(user specific) string generated 
     ticker = Column(String(20), nullable=False, unique=True, index=True)
     type =  Column(String(20), nullable=False)
     # future make type as enum with values 'default', 'custom'
