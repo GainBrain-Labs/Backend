@@ -3,9 +3,13 @@ from app.db.session import session_manager
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.user_repository import UserRepository
 from app.repositories.timescale_repository import TimescaleRepository
+from app.repositories.portfolio_repository import PortfolioRepository
+from app.repositories.stock_repository import StockRepository
 from app.services.user_service import UserService
 from app.services.auth_service import AuthService
 from app.services.data_service import DataService
+from app.services.stock_service import StockService
+from app.services.portfolio_service import PortfolioService
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -17,16 +21,21 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 async def get_user_context() -> dict[str, UserService]:
     async with session_manager.session() as session:
+        portfolio_repo = PortfolioRepository(session)
+        stock_repo = StockRepository(session)
         user_repo = UserRepository(session)
         timescale_repo = TimescaleRepository(session)
-        
         user_service = UserService(user_repo)
         auth_service = AuthService()
         data_service = DataService(timescale_repo)
+        portfolio_service = PortfolioService(portfolio_repo)
+        stock_service = StockService(stock_repo)
         return {
             "user_service": user_service,
             "auth_service": auth_service,
-            "data_service": data_service
+            "data_service": data_service,
+            "portfolio_service": portfolio_service,
+            "stock_service": stock_service
         }
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")

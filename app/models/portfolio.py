@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 class Portfolio(BasicModel):
     __tablename__ = 'portfolio'
     
-    name = Column(String(100), nullable=False, unique=True)
+    name = Column(String(100), nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'),nullable=False)
     portfolio_composition = relationship('PortfolioComposition',backref='portfolio',cascade='all, delete-orphan')
     backtest = relationship('Backtest', backref='portfolio', cascade='all, delete-orphan')

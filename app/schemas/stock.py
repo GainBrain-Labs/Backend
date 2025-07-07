@@ -12,3 +12,22 @@ class StockData(BaseModel):
     high_price: float
     low_price: float
     volume: float
+
+class CreateStock(BaseModel):
+    name: str
+    ticker: str
+
+class CreateStockGroup(BaseModel):
+    name: str
+    ticker: str
+    type: str
+
+class CreateDefaultStockGroup(CreateStockGroup):
+    stock_group_type:  str
+
+class CreateCustomStockGroup(CreateStockGroup):
+    user_id: int
+
+class CreateStockGroupComposition(BaseModel):
+    stock_group_id: int
+    stock_id: int
